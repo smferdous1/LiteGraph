@@ -1,6 +1,6 @@
 #include <iostream>
-#include "LightGraph/graph.h"
-#include "LightGraph/input.h"
+#include "LiteGraph/graph.h"
+#include "LiteGraph/input.h"
 
 /**
  * Read a graph file passed on the command line and print its CSR entries.
@@ -18,7 +18,7 @@ int main(int argc, char **argv)
     }
 
     Input input;
-    LightGraph<> graph;
+    LiteGraph<> graph;
 
     input.readGraphGen(argv[1], graph);
     graph.printGraph();

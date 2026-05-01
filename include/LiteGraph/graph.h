@@ -6,8 +6,8 @@
 
 //Template type configuration for graph types.
 //Users can specialize with different types:
-//  LightGraph<> g;  // uses defaults: float, unsigned int, unsigned int
-//  LightGraph<double, uint32_t, uint64_t> large_g;  // custom types
+//  LiteGraph<> g;  // uses defaults: float, unsigned int, unsigned int
+//  LiteGraph<double, uint32_t, uint64_t> large_g;  // custom types
 template <typename VAL_T = float, typename NODE_T = unsigned int, typename EDGE_T = unsigned int>
 struct GraphTypes
 {
@@ -112,7 +112,7 @@ template <typename VAL_T, typename NODE_T>
 using Adjacent = Adj<VAL_T, NODE_T>;
 
 template <typename VAL_T = float, typename NODE_T = unsigned int, typename EDGE_T = unsigned int>
-class LightGraph
+class LiteGraph
 {
 
     //number of nodes in the graph
@@ -130,7 +130,7 @@ class LightGraph
     /**
      * Construct an empty graph with no allocated CSR storage.
      */
-    LightGraph()
+    LiteGraph()
     {
         A = 0;
         IA = 0;
@@ -146,7 +146,7 @@ class LightGraph
      * @param n1 Number of graph nodes.
      * @param m1 Number of undirected edges.
      */
-    LightGraph(NODE_T n1, EDGE_T m1)
+    LiteGraph(NODE_T n1, EDGE_T m1)
     {
         n = n1;
         m = m1;
@@ -164,7 +164,7 @@ class LightGraph
     /**
      * Release all CSR and reference-array storage owned by the graph.
      */
-    ~LightGraph()
+    ~LiteGraph()
     {
         if(is_destroyed == false)
         {
@@ -438,14 +438,14 @@ class BptGraph
 // Template member function implementations
 // ============================================
 
-// LightGraph implementations
+// LiteGraph implementations
 /**
  * Create a weighted edge list from a symmetric CSR graph.
  *
  * @param outList Destination vector cleared and filled with one weighted entry per undirected edge.
  */
 template <typename VAL_T, typename NODE_T, typename EDGE_T>
-void LightGraph<VAL_T, NODE_T, EDGE_T>::createEdgeList(WeightEdgeSimList<VAL_T, NODE_T> &outList)
+void LiteGraph<VAL_T, NODE_T, EDGE_T>::createEdgeList(WeightEdgeSimList<VAL_T, NODE_T> &outList)
 {
     //clearing the edgelist. EdgeList is given as a pointer
     //remember you have to give a preallocated address here. 
@@ -471,7 +471,7 @@ void LightGraph<VAL_T, NODE_T, EDGE_T>::createEdgeList(WeightEdgeSimList<VAL_T, 
  * @param outList Destination vector cleared and filled with one compact entry per undirected edge.
  */
 template <typename VAL_T, typename NODE_T, typename EDGE_T>
-void LightGraph<VAL_T, NODE_T, EDGE_T>::createEdgeList(SimEdgeList<NODE_T, EDGE_T> &outList)
+void LiteGraph<VAL_T, NODE_T, EDGE_T>::createEdgeList(SimEdgeList<NODE_T, EDGE_T> &outList)
 {
     //clearing the edgelist. EdgeList is given as a pointer
     //remember you have to give a preallocated address here. 
@@ -497,7 +497,7 @@ void LightGraph<VAL_T, NODE_T, EDGE_T>::createEdgeList(SimEdgeList<NODE_T, EDGE_
  * @param is_invRef When true, allocate and fill invRA in addition to RA.
  */
 template <typename VAL_T, typename NODE_T, typename EDGE_T>
-void LightGraph<VAL_T, NODE_T, EDGE_T>::createRefArray(bool is_invRef)
+void LiteGraph<VAL_T, NODE_T, EDGE_T>::createRefArray(bool is_invRef)
 {
     RA = new EDGE_T[2*m];
     if(is_invRef) invRA = new EDGE_T[2*m];
@@ -530,7 +530,7 @@ void LightGraph<VAL_T, NODE_T, EDGE_T>::createRefArray(bool is_invRef)
  * Print graph metadata followed by each directed CSR entry as source vertex, destination vertex, and weight.
  */
 template <typename VAL_T, typename NODE_T, typename EDGE_T>
-void LightGraph<VAL_T, NODE_T, EDGE_T>::printGraph()
+void LiteGraph<VAL_T, NODE_T, EDGE_T>::printGraph()
 {
     std::cout<<"Number of vertices: "<<n<<std::endl;
     std::cout<<"Number of edges: "<<m<<std::endl;
@@ -550,7 +550,7 @@ void LightGraph<VAL_T, NODE_T, EDGE_T>::printGraph()
  * @param offset Value added to each printed source vertex id.
  */
 template <typename VAL_T, typename NODE_T, typename EDGE_T>
-void LightGraph<VAL_T, NODE_T, EDGE_T>::printGraph(NODE_T offset)
+void LiteGraph<VAL_T, NODE_T, EDGE_T>::printGraph(NODE_T offset)
 {
     std::cout<<"Number of vertices: "<<n<<std::endl;
     std::cout<<"Number of edges: "<<m<<std::endl;
@@ -568,7 +568,7 @@ void LightGraph<VAL_T, NODE_T, EDGE_T>::printGraph(NODE_T offset)
  * Sort every CSR row by destination vertex id while preserving each edge weight.
  */
 template <typename VAL_T, typename NODE_T, typename EDGE_T>
-void LightGraph<VAL_T, NODE_T, EDGE_T>::sortGraph()
+void LiteGraph<VAL_T, NODE_T, EDGE_T>::sortGraph()
 {
     std::vector<std::pair<NODE_T,VAL_T> > sortInd;
     for (NODE_T i=0;i<n;i++)

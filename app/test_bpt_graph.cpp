@@ -1,6 +1,6 @@
 #include <iostream>
-#include "LightGraph/graph.h"
-#include "LightGraph/input.h"
+#include "LiteGraph/graph.h"
+#include "LiteGraph/input.h"
 
 /**
  * Read a bipartite graph file passed on the command line and print its CSR entries.

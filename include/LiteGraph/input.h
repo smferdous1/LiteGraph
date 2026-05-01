@@ -17,7 +17,7 @@ class Input
 
   public:
       /**
-       * Read a Matrix Market graph file into a general LightGraph.
+       * Read a Matrix Market graph file into a general LiteGraph.
        *
        * @param fileName Path to the input .mtx file.
        * @param graph Graph object that receives allocated CSR arrays.
@@ -27,7 +27,7 @@ class Input
        * @param maxW Maximum generated random weight.
        */
       template <typename VAL_T, typename NODE_T, typename EDGE_T>
-      void readMtx(std::string fileName, LightGraph<VAL_T, NODE_T, EDGE_T>& graph, bool is_random=false, long seed=0, VAL_T minW=0, VAL_T maxW=0);
+      void readMtx(std::string fileName, LiteGraph<VAL_T, NODE_T, EDGE_T>& graph, bool is_random=false, long seed=0, VAL_T minW=0, VAL_T maxW=0);
       
       /**
        * Read a Matrix Market graph file into a bipartite BptGraph.
@@ -53,7 +53,7 @@ class Input
        * @param maxW Maximum generated random weight.
        */
       template <typename VAL_T, typename NODE_T, typename EDGE_T>
-      void readGraphGen(std::string fileName, LightGraph<VAL_T, NODE_T, EDGE_T>& graph, int is_random=0, long int seed=0, VAL_T minW=0, VAL_T maxW=0);
+      void readGraphGen(std::string fileName, LiteGraph<VAL_T, NODE_T, EDGE_T>& graph, int is_random=0, long int seed=0, VAL_T minW=0, VAL_T maxW=0);
       
       /**
        * Read a bipartite graph from LiteGraph binary format.
@@ -80,7 +80,7 @@ class Input
        * @param graph Graph object that receives allocated CSR arrays.
        */
       template <typename VAL_T, typename NODE_T, typename EDGE_T>
-      void readBinGen(std::string fileName, LightGraph<VAL_T, NODE_T, EDGE_T>& graph);
+      void readBinGen(std::string fileName, LiteGraph<VAL_T, NODE_T, EDGE_T>& graph);
       
       /**
        * Write a general graph to LiteGraph binary format.
@@ -89,7 +89,7 @@ class Input
        * @param graph Graph whose CSR arrays are written.
        */
       template <typename VAL_T, typename NODE_T, typename EDGE_T>
-      void wrtBinGen(std::string fileName, LightGraph<VAL_T, NODE_T, EDGE_T>& graph);
+      void wrtBinGen(std::string fileName, LiteGraph<VAL_T, NODE_T, EDGE_T>& graph);
       
       /**
        * Construct an input helper without a default file name.
@@ -144,7 +144,7 @@ inline bool fileTypeCheck(std::string fn, std::string extension)
  * @param maxW Maximum generated random weight.
  */
 template <typename VAL_T, typename NODE_T, typename EDGE_T>
-void Input::readGraphGen(std::string fileName, LightGraph<VAL_T, NODE_T, EDGE_T> &G, int is_random, long seed, VAL_T minW, VAL_T maxW)
+void Input::readGraphGen(std::string fileName, LiteGraph<VAL_T, NODE_T, EDGE_T> &G, int is_random, long seed, VAL_T minW, VAL_T maxW)
 {
     if(fileTypeCheck(fileName,"mtx")==true)
     {
@@ -172,7 +172,7 @@ void Input::readGraphGen(std::string fileName, LightGraph<VAL_T, NODE_T, EDGE_T>
  * @param maxW Maximum generated random weight.
  */
 template <typename VAL_T, typename NODE_T, typename EDGE_T>
-void Input::readMtx(std::string fileName, LightGraph<VAL_T, NODE_T, EDGE_T> &G, bool is_random, long seed, VAL_T minW, VAL_T maxW)
+void Input::readMtx(std::string fileName, LiteGraph<VAL_T, NODE_T, EDGE_T> &G, bool is_random, long seed, VAL_T minW, VAL_T maxW)
 {
     srand(seed);
     std::ifstream fileread(fileName.c_str());
@@ -366,7 +366,7 @@ void Input::readMtxBpt(std::string fileName, BptGraph<VAL_T, NODE_T, EDGE_T> &G,
  * @param G Graph object that receives allocated CSR arrays.
  */
 template <typename VAL_T, typename NODE_T, typename EDGE_T>
-void Input::readBinGen(std::string fileName, LightGraph<VAL_T, NODE_T, EDGE_T> &G)
+void Input::readBinGen(std::string fileName, LiteGraph<VAL_T, NODE_T, EDGE_T> &G)
 {
     std::ifstream inf;
     NODE_T nA,nB;
@@ -402,7 +402,7 @@ void Input::readBinGen(std::string fileName, LightGraph<VAL_T, NODE_T, EDGE_T> &
  * @param G Graph whose CSR arrays are written.
  */
 template <typename VAL_T, typename NODE_T, typename EDGE_T>
-void Input::wrtBinGen(std::string fileName, LightGraph<VAL_T, NODE_T, EDGE_T> &G)
+void Input::wrtBinGen(std::string fileName, LiteGraph<VAL_T, NODE_T, EDGE_T> &G)
 {
     std::ofstream of;
     NODE_T nA = G.numberOfNodes();

@@ -5,15 +5,15 @@ LiteGraph is a small C++11 graph library for storing weighted graphs in compress
 The library is templated, so callers can choose the value, node-id, and edge-count types used by a graph:
 
 ```cpp
-LightGraph<> graph;                                  // float, unsigned int, unsigned int
-LightGraph<double, uint32_t, uint64_t> largeGraph;   // custom types
+LiteGraph<> graph;                                  // float, unsigned int, unsigned int
+LiteGraph<double, uint32_t, uint64_t> largeGraph;   // custom types
 BptGraph<double, uint32_t, uint64_t> bipartiteGraph;
 ```
 
 ## Repository Layout
 
 ```text
-include/LightGraph/
+include/LiteGraph/
   graph.h        Graph data structures and CSR utilities
   input.h        Matrix Market and binary graph I/O
 
@@ -38,7 +38,7 @@ Most implementation lives in the headers because the main APIs are templates.
 
 ## Graph Types
 
-`LightGraph<VAL_T, NODE_T, EDGE_T>` stores a general graph as symmetric CSR arrays:
+`LiteGraph<VAL_T, NODE_T, EDGE_T>` stores a general graph as symmetric CSR arrays:
 
 - `A`: edge weights
 - `IA`: row offsets
@@ -73,12 +73,12 @@ This builds the `litegraph` static library and the example test executables in `
 ## Basic Usage
 
 ```cpp
-#include "LightGraph/graph.h"
-#include "LightGraph/input.h"
+#include "LiteGraph/graph.h"
+#include "LiteGraph/input.h"
 
 int main()
 {
-    LightGraph<> graph;
+    LiteGraph<> graph;
     Input input;
 
     input.readGraphGen("data/graph.mtx", graph);
@@ -93,20 +93,20 @@ int main()
 To construct a graph manually with allocated CSR storage:
 
 ```cpp
-LightGraph<float, unsigned int, unsigned int> graph(10, 20);
+LiteGraph<float, unsigned int, unsigned int> graph(10, 20);
 
 graph.setNumberNodes(10);
 graph.setNumberEdges(20);
 ```
 
-The sized `LightGraph` constructor allocates storage for an undirected graph, using `2 * m` entries for symmetric CSR adjacency.
+The sized `LiteGraph` constructor allocates storage for an undirected graph, using `2 * m` entries for symmetric CSR adjacency.
 
 ## Reading Matrix Market Files
 
 General graphs can be read from `.mtx` files:
 
 ```cpp
-LightGraph<> graph;
+LiteGraph<> graph;
 Input input;
 
 input.readMtx("data/graph.mtx", graph);
@@ -135,12 +135,12 @@ LiteGraph can write and read its own binary CSR format:
 
 ```cpp
 Input input;
-LightGraph<> graph;
+LiteGraph<> graph;
 
 input.readGraphGen("data/graph.mtx", graph);
 input.wrtBinGen("graph.bin", graph);
 
-LightGraph<> reloaded;
+LiteGraph<> reloaded;
 input.readBinGen("graph.bin", reloaded);
 ```
 
@@ -155,7 +155,7 @@ input.wrtBinBpt("bipartite.bin", graph);
 
 ## Utility Operations
 
-`LightGraph` supports:
+`LiteGraph` supports:
 
 - `numberOfNodes()` and `numberOfEdges()`
 - `sortGraph()` to sort each CSR row by adjacent vertex id
@@ -200,8 +200,8 @@ target_link_libraries(my_app PRIVATE litegraph)
 In C++ code, include the public headers:
 
 ```cpp
-#include "LightGraph/graph.h"
-#include "LightGraph/input.h"
+#include "LiteGraph/graph.h"
+#include "LiteGraph/input.h"
 ```
 
 ## Requirements

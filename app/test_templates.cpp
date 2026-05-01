@@ -1,6 +1,6 @@
 #include <iostream>
-#include "LightGraph/graph.h"
-#include "LightGraph/input.h"
+#include "LiteGraph/graph.h"
+#include "LiteGraph/input.h"
 
 /**
  * Run template-instantiation checks for default and custom graph type aliases.
@@ -10,13 +10,13 @@
 int main() {
     // Test 1: Instantiate with default template parameters
     std::cout << "Test 1: Default graph types (float, unsigned int, unsigned int)" << std::endl;
-    LightGraph<> g1;
-    std::cout << "  Created LightGraph<> successfully" << std::endl;
+    LiteGraph<> g1;
+    std::cout << "  Created LiteGraph<> successfully" << std::endl;
     
     // Test 2: Instantiate with custom types
     std::cout << "\nTest 2: Custom graph types (double, uint32_t, uint64_t)" << std::endl;
-    LightGraph<double, uint32_t, uint64_t> g2;
-    std::cout << "  Created LightGraph<double, uint32_t, uint64_t> successfully" << std::endl;
+    LiteGraph<double, uint32_t, uint64_t> g2;
+    std::cout << "  Created LiteGraph<double, uint32_t, uint64_t> successfully" << std::endl;
     
     // Test 3: Bipartite graph with defaults
     std::cout << "\nTest 3: Default BptGraph types" << std::endl;
@@ -35,8 +35,8 @@ int main() {
     
     // Test 6: Constructor with parameters
     std::cout << "\nTest 6: Graph with size parameters" << std::endl;
-    LightGraph<float, unsigned int, unsigned int> g3(100, 500);
-    std::cout << "  Created LightGraph with n=100, m=500" << std::endl;
+    LiteGraph<float, unsigned int, unsigned int> g3(100, 500);
+    std::cout << "  Created LiteGraph with n=100, m=500" << std::endl;
     std::cout << "  numberOfNodes() = " << g3.numberOfNodes() << std::endl;
     std::cout << "  numberOfEdges() = " << g3.numberOfEdges() << std::endl;
     
