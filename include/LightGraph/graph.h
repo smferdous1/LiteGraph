@@ -282,12 +282,12 @@ class LightGraph
     void createEdgeList(SimEdgeList<NODE_T, EDGE_T> &outList);
 
     /**
-     * Print every directed CSR entry as source, destination, and weight.
+     * Print graph metadata followed by every directed CSR entry as source, destination, and weight.
      */
     void printGraph();
 
     /**
-     * Print every directed CSR entry with an offset applied to source ids.
+     * Print graph metadata followed by every directed CSR entry with an offset applied to source ids.
      *
      * @param offset Value added to each printed source vertex id.
      */
@@ -424,7 +424,7 @@ class BptGraph
     }
 
     /**
-     * Print the bipartite graph header followed by each CSR entry.
+     * Print bipartite graph metadata followed by each CSR entry.
      */
     void printGraph();
 
@@ -527,11 +527,14 @@ void LightGraph<VAL_T, NODE_T, EDGE_T>::createRefArray(bool is_invRef)
 }
 
 /**
- * Print each directed CSR entry as source vertex, destination vertex, and weight.
+ * Print graph metadata followed by each directed CSR entry as source vertex, destination vertex, and weight.
  */
 template <typename VAL_T, typename NODE_T, typename EDGE_T>
 void LightGraph<VAL_T, NODE_T, EDGE_T>::printGraph()
 {
+    std::cout<<"Number of vertices: "<<n<<std::endl;
+    std::cout<<"Number of edges: "<<m<<std::endl;
+    std::cout<<"Edges:"<<std::endl;
     for(NODE_T i=0;i<n;i++)
     {
         for(NODE_T j=IA[i];j<IA[i+1];j++)
@@ -542,13 +545,16 @@ void LightGraph<VAL_T, NODE_T, EDGE_T>::printGraph()
 }
 
 /**
- * Print each directed CSR entry with an offset applied to source vertex ids.
+ * Print graph metadata followed by each directed CSR entry with an offset applied to source vertex ids.
  *
  * @param offset Value added to each printed source vertex id.
  */
 template <typename VAL_T, typename NODE_T, typename EDGE_T>
 void LightGraph<VAL_T, NODE_T, EDGE_T>::printGraph(NODE_T offset)
 {
+    std::cout<<"Number of vertices: "<<n<<std::endl;
+    std::cout<<"Number of edges: "<<m<<std::endl;
+    std::cout<<"Edges:"<<std::endl;
     for(NODE_T i=0;i<n;i++)
     {
         for(NODE_T j=IA[i];j<IA[i+1];j++)
@@ -588,12 +594,15 @@ void LightGraph<VAL_T, NODE_T, EDGE_T>::sortGraph()
 
 // BptGraph implementations
 /**
- * Print the bipartite graph dimensions followed by each CSR entry.
+ * Print bipartite graph metadata followed by each CSR entry.
  */
 template <typename VAL_T, typename NODE_T, typename EDGE_T>
 void BptGraph<VAL_T, NODE_T, EDGE_T>::printGraph()
 {
-    std::cout<<nA<<" "<<nB<<" "<<m<<std::endl;
+    std::cout<<"Number of row vertices: "<<nA<<std::endl;
+    std::cout<<"Number of column vertices: "<<nB<<std::endl;
+    std::cout<<"Number of edges: "<<m<<std::endl;
+    std::cout<<"Edges:"<<std::endl;
     for(NODE_T i=0;i<nA;i++)
     {
         for(NODE_T j=IA[i];j<IA[i+1];j++)

@@ -1,0 +1,10 @@
+%%MatrixMarket matrix coordinate real symmetric
+% Sample weighted undirected graph for LiteGraph examples.
+% Rows and columns are 1-based Matrix Market vertex ids.
+5 5 6
+2 1 1.0
+3 1 2.5
+3 2 1.2
+4 2 0.8
+5 3 3.1
+5 4 1.7
